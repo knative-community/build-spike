@@ -49,6 +49,12 @@ Run it with:
 ```
 kubetl create -f ImagePushSecret.yaml
 ```
+- `docker_password` is the token. You can use `ibmcloud cr token-list` to list all tokens and choose one which `Read-only` is false. Then 
+```
+token=$(ibmcloud cr token-get ${token_id} -q)
+docker_password=$(echo -n ${token} | base64)
+```
+- `docker_username` is `token`. So `docker_username=$(echo -n 'token' | base64)`
 
 ### Secret for pulling image
 Besides, if your cluster account is not same with the account of container registry. Then maybe you also need to prepare another secret for pulling an image. Create a pull image secret called `ibm-cr-pull-secret`.
